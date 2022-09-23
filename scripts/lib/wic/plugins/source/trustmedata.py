@@ -118,7 +118,7 @@ class TrustmeDataPlugin(SourcePlugin):
         install_cmd = "install -d %s/cml/tokens" % hdddir 
         exec_cmd(install_cmd)
 
-        install_cmd = "install -d %s/cml/containers_templates" % hdddir 
+        install_cmd = "install -d %s/cml/containers" % hdddir 
         exec_cmd(install_cmd)
 
         # copy device config
@@ -127,7 +127,7 @@ class TrustmeDataPlugin(SourcePlugin):
 
 
         # copy container configs
-        cp_cmd = "cp -ar {0}/trustx-configs/container/. {1}/cml/containers_templates/".format(deploy_dir_image, hdddir)
+        cp_cmd = "cp -ar {0}/trustx-configs/container/. {1}/cml/containers/".format(deploy_dir_image, hdddir)
         exec_cmd(cp_cmd)
 
 

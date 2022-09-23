@@ -143,7 +143,7 @@ do_build_trustmeimage () {
 	install -d "${tmp_firmware}/"
 
 	install -d "${rootfs_datadir}/cml/tokens"
-	install -d "${rootfs_datadir}/cml/containers_templates"
+	install -d "${rootfs_datadir}/cml/containers"
 
 	# define file locations
 	#deploy_dir_container = "${tmpdir}/deploy/images/qemu-x86-64"
@@ -172,12 +172,12 @@ do_build_trustmeimage () {
 
 	if [ -d "${TOPDIR}/../custom_containers" ];then # custom container provided in ${TOPDIR}/../custom_container
 		bbnote "Installing custom container and configs to image: ${TOPDIR}/../custom_containers"
-		cp -far "${TOPDIR}/../custom_containers/00000000-0000-0000-0000-000000000000.conf" "${rootfs_datadir}/cml/containers_templates/"
+		cp -far "${TOPDIR}/../custom_containers/00000000-0000-0000-0000-000000000000.conf" "${rootfs_datadir}/cml/containers/"
 		find "${TOPDIR}/../custom_containers/" -name '*os*' -exec cp -afr {} "${rootfs_datadir}/cml/operatingsystems" \;
 		cp -f "${TOPDIR}/../custom_containers/device.conf" "${rootfs_datadir}/cml/"
 	elif [ -d "${deploy_dir_container}/trustx-guests" ];then # container built in default location
 		bbnote "Installing containers from default location ${deploy_dir_container}/trustx-guests"
-		cp -far "${deploy_dir_container}/trustx-configs/container/." "${rootfs_datadir}/cml/containers_templates/"
+		cp -far "${deploy_dir_container}/trustx-configs/container/." "${rootfs_datadir}/cml/containers/"
 		cp -afr "${deploy_dir_container}/trustx-guests/." "${rootfs_datadir}/cml/operatingsystems"
 		cp -f "${deploy_dir_container}/trustx-configs/device.conf" "${rootfs_datadir}/cml/"
 	else # no container provided
@@ -186,7 +186,7 @@ do_build_trustmeimage () {
 	fi
 
 	# sign container configs
-	find "${rootfs_datadir}/cml/containers_templates" -name '*.conf' -exec bash \
+	find "${rootfs_datadir}/cml/containers" -name '*.conf' -exec bash \
 		${enrollment_dir}/config_creator/sign_config.sh {} \
 		${TEST_CERT_DIR}/ssig_cml.key ${TEST_CERT_DIR}/ssig_cml.cert \;
 

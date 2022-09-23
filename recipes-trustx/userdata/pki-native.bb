@@ -16,7 +16,7 @@ inherit native
 
 do_compile() {
 	#TODO Find cleaner way to do this
-	# random string to ignore SSTATE_MIRROR
+	# random string to ignore SSTATE_MIRROR: db7d5c51a3f950778c1d65848c83cd2514a964e5
     if [ ! -f ${TEST_CERT_DIR}.generating ]; then
         touch ${TEST_CERT_DIR}.generating
         export DO_PLATFORM_KEYS=${PKI_UEFI_KEYS}

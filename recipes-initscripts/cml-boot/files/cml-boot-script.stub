@@ -163,11 +163,6 @@ mount -a
 
 mkdir -p /var/volatile/tmp
 
-for suffix in conf sig cert; do
-	if [ ! -f "/data/cml/containers/00000000-0000-0000-0000-000000000000.$suffix" ]; then
-		cp /data/cml/containers_templates/00000000-0000-0000-0000-000000000000.$suffix /data/cml/containers/00000000-0000-0000-0000-000000000000.$suffix
-	fi
-done
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin"
 
