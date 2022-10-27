@@ -144,6 +144,8 @@ do_build_trustmeimage () {
 
 	install -d "${rootfs_datadir}/cml/tokens"
 	install -d "${rootfs_datadir}/cml/containers"
+	#TODO overlay only needed for development build
+	install -d "${rootfs_datadir}/cml/containers_overlay"
 
 	# define file locations
 	#deploy_dir_container = "${tmpdir}/deploy/images/qemu-x86-64"

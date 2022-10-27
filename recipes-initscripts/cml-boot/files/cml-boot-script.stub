@@ -145,6 +145,20 @@ else
 	mount -o bind,nosuid,nodev,noexec /mnt/userdata /data
 fi
 
+mount LABEL=containers -o nosuid,nodev,noexec,nofail /data/cml/containers_overlay
+if [ $? -eq 0 ]
+then
+	mkdir -p /data/cml/containers_overlay/work
+	mkdir -p /data/cml/containers_overlay/data
+	mount -t overlay overlay -o lowerdir=/data/cml/containers,upperdir=/data/cml/containers_overlay/data,workdir=/data/cml/containers_overlay/work /data/cml/containers
+	if [ $? -ne 0 ]
+	then
+		echo "WARN: Failed to mount containers btrfs as overlayfs"
+	fi
+else
+	echo "No containers fs supplied"
+fi
+
 mkdir -p /data/logs
 
 #now modules partition is mounted

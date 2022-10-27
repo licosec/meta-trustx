@@ -27,6 +27,7 @@ do_install() {
 
 	if [ "y" != "${DEVELOPMENT_BUILD}" ];then
 		sed -i '/^mkdir -p \/mnt\/extdata/,/^fi/d' ${D}/init
+		sed -i '/^mount LABEL=containers/,/^fi/d' ${D}/init
 		sed -i 's|mkdir -p /data/logs|mount -o bind,nosuid,nodev,noexec \/mnt\/userdata \/data\n\nmkdir -p /data/logs|' ${D}/init
 	fi
 
