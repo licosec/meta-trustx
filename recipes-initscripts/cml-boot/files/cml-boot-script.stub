@@ -145,6 +145,7 @@ else
 	mount -o bind,nosuid,nodev,noexec /mnt/userdata /data
 fi
 
+mkdir -p /data/cml/containers_overlay
 mount LABEL=containers -o nosuid,nodev,noexec,nofail /data/cml/containers_overlay
 if [ $? -eq 0 ]
 then
